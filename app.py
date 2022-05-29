@@ -1,3 +1,7 @@
+"""
+This file runs the Flask application we are using as an API endpoint.
+"""
+
 import pickle
 from flask import Flask
 from flask import request
@@ -5,6 +9,7 @@ from flask import jsonify
 from train import Perceptron
 import joblib
 
+# Create a flask
 app = Flask(__name__)
 
 # Create an API end point
@@ -13,18 +18,12 @@ def get_prediction():
 
     # sepal length
     sepal_length = float(request.args.get('sl'))
-    # sepal width
-    sepal_width = float(request.args.get('sw'))
+
     # petal length
     petal_length = float(request.args.get('pl'))
-    # petal width
-    petal_width = float(request.args.get('pw'))
 
     # The features of the observation to predict
-    features = [sepal_length,
-                sepal_width,
-                petal_length,
-                petal_width]
+    features = [sepal_length, petal_length]
 
     # Load pickled model file
     model = joblib.load('model.pkl')
